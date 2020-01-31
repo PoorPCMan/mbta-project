@@ -22,7 +22,7 @@ npm install
 ```
 
 To have any of the AJAX requests to work, you'll need an API key.
-You can get request one [here](https://api-v3.mbta.com/).
+You can request for one [here](https://api-v3.mbta.com/).
 After you get one, you should make a blank js file and format it like this:
 ```js
 var apikey = "your-key-here";
