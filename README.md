@@ -44,8 +44,8 @@ But what exactly is CORS? I'm not exactly too sure of it myself, but you can try
 
 Here are two resources that I used to get some idea of it:
 
-[Understanding through a metaphor](https://dev.to/dougblackjr/cors-in-a-way-i-can-understand-501d)
-[Security reasons why](https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/)
+- [Understanding through a metaphor](https://dev.to/dougblackjr/cors-in-a-way-i-can-understand-501d)
+- [Security reasons why](https://www.moesif.com/blog/technical/cors/Authoritative-Guide-to-CORS-Cross-Origin-Resource-Sharing-for-REST-APIs/)
 
 I'm sure you could find better sources.
 
