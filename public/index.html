@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/style.min.css">
+</head>
+
+<body>
+	<div id="Header" class="hero">
+		<body>
+			<h1 class="hero-text">Orange you're glad you're on time?</h1>
+			<p class="hero-subtext"> A project to display Orange Line info using the MBTA API.</p>
+		</div>
+		<div class="mbta-container container-fluid">
+			<div id="trainInfo" class="container text-center">
+				<div id="orangeline">
+					<div class="row">
+						<div id="orangeschedule" class="shadow p-3 mb-5 bg-white rounded col-md-8">
+							<h2 class="bg-info">Departures</h2>
+
+							<table id="orangetable">
+								<thead>
+									<tr>
+										<th>Stop</th>
+										<th>Inbound</th>
+										<th>Outbound</th>
+									<tr>
+								</thead>
+
+							</table>
+
+						</div>
+						<div id="orangealerts" class="shadow p-3 mb-5 bg-white rounded col-md-4">
+							<h2 class="bg-warning">Alerts</h2>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<footer class="card-footer text-center">Lorem footsem</footer>
+	</body>
+	<!-- Load javascript last, so it doesn't lag-->
+	<script src="/js/main.min.js"></script>
+
+	</html>
