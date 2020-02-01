@@ -120,7 +120,6 @@ function getAlerts(route) {
 function buildOrangeSchedule() {
     //get initial area to play in
     var schedule = document.getElementById("orangetable");
-    var head = document.createElement('thead');
     var body = document.createElement('tbody');
 
     //loop through our stop list here
@@ -189,14 +188,12 @@ function callbackgetStop(data) {
 
     //injecting time into targetted html element
     //TODO: add parser or interpreter for time in 12H format
-    var departtime = data.data[0].attributes.departure_time.split('T');
-    var arrivetime = data.data[0].attributes.arrival_time.split('T');
-    if((departtime != undefined) && (arrivetime != undefined)) {
-        time = arrivetime;
-    } else if (departtime == undefined) {
-        time = undefined;
+    var departtime = data.data[0].attributes.departure_time;
+    var arrivetime = data.data[0].attributes.arrival_time;
+    if((departtime != null) && (arrivetime != null)) {
+        var time = arrivetime;
     } else {
-        time = departtime;
+        var time = departtime;
     }
     var target = document.getElementById(elementid);
     target.innerHTML = time;
