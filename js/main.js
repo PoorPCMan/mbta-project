@@ -16,6 +16,7 @@ var orange_stops =
         "place-grnst",
         "place-sbmnl",
         "place-jaksn",
+        "place-rcmnl",
         "place-rugg",
         "place-masta",
         "place-bbsta",
@@ -32,6 +33,7 @@ var orange_stops =
         "place-mlmnl",
         "place-ogmnl"
     ];
+
 
 var orange_inbound;
 var orange_outbound;
@@ -118,6 +120,7 @@ function getAlerts(route) {
 function buildOrangeSchedule() {
     //get initial area to play in
     var schedule = document.getElementById("orangetable");
+    var head = document.createElement('thead');
     var body = document.createElement('tbody');
 
     //loop through our stop list here
@@ -127,16 +130,18 @@ function buildOrangeSchedule() {
         var stop = document.createElement('tr');
 
         var stopname = document.createElement('td');
-        stopname.innerHTML = orange_stops[i];
-        stopname.setAttribute("id", orange_stops[i]);
+        stopname.innerHTML = "...";
+        stopname.setAttribute("id", orange_stops[i]+"-name");
         stop.appendChild(stopname);
 
         var inboundtime = document.createElement('td');
+        inboundtime.innerHTML = "...";
         inboundtime.setAttribute("id", orange_stops[i]+"-in");
         getStop(orange_stops[i], '0', 'orange');
         stop.appendChild(inboundtime);
 
         var outboundtime = document.createElement('td');
+        outboundtime.innerHTML = "...";
         outboundtime.setAttribute("id", orange_stops[i]+"-out");
         getStop(orange_stops[i], '1', 'orange');
         stop.appendChild(outboundtime);
@@ -175,9 +180,24 @@ function callbackgetStop(data) {
         elementid = data.included[0].relationships.parent_station.data.id + "-out";
 	} 
 
+    //injecting full name from the response
+    // !!! will probably be overwritten twice, but not too big of an issue
+    var stopname = data.included[0].attributes.name;
+    var stopelement = document.getElementById(data.included[0].relationships.parent_station.data.id+ "-name");
+    stopelement.innerHTML = stopname;
+
+
     //injecting time into targetted html element
     //TODO: add parser or interpreter for time in 12H format
-    var time = data.data[0].attributes.departure_time.split('T');
+    var departtime = data.data[0].attributes.departure_time.split('T');
+    var arrivetime = data.data[0].attributes.arrival_time.split('T');
+    if((departtime != undefined) && (arrivetime != undefined)) {
+        time = arrivetime;
+    } else if (departtime == undefined) {
+        time = undefined;
+    } else {
+        time = departtime;
+    }
     var target = document.getElementById(elementid);
     target.innerHTML = time;
 
@@ -191,20 +211,6 @@ function callbackgetStop(data) {
 	// console.log(time[1]);
 	// addData('p3', direction + time[1], node);
 }
-
-function callbackgetStops(data, callback, cbstring) {
-    console.log("Route:" + routename);
-    //push it into an array to process later
-    console.log("Getting stops request");
-    console.log("Stops Request length: " + data.data.length);
-    var stop;
-    for (stop = 0; stop < data.data.length; stop++) {
-        orange_stops.push(data.data[stop].attributes.name);
-    }
-    console.log(orange_stops);
-    callback(cbstring);
-}
-
 
 // function displayData(data) {
 //     //ajax call passed Json obj instead of json string so no need to parse
